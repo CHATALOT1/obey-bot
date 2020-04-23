@@ -90,7 +90,7 @@ async def setup(bot):
             ]
         return True  # Developers can run commands no matter what
 
-    for filename in listdir("Bot/cogs"):
+    for filename in listdir("bot/cogs"):
         if filename.endswith(".py"):
             try:
                 bot.load_extension(f"cogs.{filename[0:-3]}")
