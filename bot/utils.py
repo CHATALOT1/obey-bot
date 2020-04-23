@@ -21,7 +21,7 @@ async def add_reactions(message, *reacs):
         await message.add_reaction(reac)
 
 
-def cog_setup_callback(task: asyncio.Task):
+def done_callback(task: asyncio.Task):
     if task.exception():
         task.print_stack()
 
