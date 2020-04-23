@@ -3,3 +3,4 @@ discord.py
 pre-commit
 jishaku
 python-dotenv
+aiohttp
