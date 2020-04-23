@@ -7,7 +7,7 @@ import sys
 import discord
 from discord.ext import commands
 
-from utils import get_and_split_env
+from utils import get_and_split_env, done_callback
 
 chdir(path.join(path.dirname(path.realpath(__file__)), ".."))
 load_dotenv()
@@ -103,7 +103,8 @@ async def setup(bot):
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     try:
-        loop.create_task(setup(bot))
+        task = loop.create_task(setup(bot))
+        task.add_done_callback(done_callback)
         loop.create_task(bot.start(getenv("BOT_TOKEN")))
         loop.run_forever()
     except KeyboardInterrupt:
