@@ -73,10 +73,7 @@ class UserCount(commands.Cog):
             for channel in category.channels
             if isinstance(channel, discord.VoiceChannel)
         }
-        total_players = 0
         for server in server_list:
-            total_players += server["player_count"]
-
             new_channel_name = (
                 f"{server['player_count']}/{server['max_players']} - "
                 f"{server['name']}"
@@ -91,15 +88,9 @@ class UserCount(commands.Cog):
                 await category.create_voice_channel(name=new_channel_name)
 
         # Delete any channels remaining in existing_channels, must no longer be open
+        # (Could also mean there are more servers open then the maximum set)
         for channel in existing_channels.values():
             await channel.delete()
-
-        # Update the guild name
-        # Everything after the | is the player count so we only grab what's before
-        guild_name = guild.name.split(" | ")[0]
-        new_guild_name = f"{guild_name} | {total_players} Players Online"
-        if not guild.name == new_guild_name:
-            await guild.edit(name=new_guild_name)
 
     @commands.command(name="update_player_counts", aliases=["update"])
     async def _update_player_counts(self, ctx):
