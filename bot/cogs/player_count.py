@@ -51,9 +51,13 @@ class UserCount(commands.Cog):
 
     async def update_player_counts_task(self):
         await self.client.wait_until_ready()
-        while not self.client.is_closed():
-            await self.update_player_counts()
-            await asyncio.sleep(300)
+
+        while True:
+            while not self.client.is_closed():
+                await self.update_player_counts()
+                await asyncio.sleep(300)
+            else:
+                await self.client.wait_until_ready()
 
     async def update_player_counts(self):
         """
