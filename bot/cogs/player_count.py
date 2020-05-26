@@ -18,7 +18,7 @@ def interpret_server_list(data: str, maximum: int = 0) -> List[Dict]:
     """
     # separate servers
     split_data = data.split("§")
-    servers = [split_data[i : i + 16] for i in range(0, len(split_data), 16)][:-1]
+    servers = [split_data[i : i + 17] for i in range(0, len(split_data), 17)][:-1]
 
     result = []
     for server in servers:
